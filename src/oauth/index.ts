@@ -40,8 +40,10 @@ export const exchangeAccess = (code: string, res: Response) => {
   JiraClient.oauth_util.swapRequestTokenWithAccessToken({
     host: jiraHost,
     oauth: {
-      token: credential.getOauthToken(),
       token_secret: credential.getOauthSecret(),
+      token: credential.getOauthToken(),
+      consumer_key: consumerKey,
+      private_key: privateKey,
       oauth_verifier: code
     }
   }, (_: any, apiResponse: any) => {
@@ -52,7 +54,7 @@ export const exchangeAccess = (code: string, res: Response) => {
 
 export const exportCredential = (res: Response): IJiraCredential => {
   const exportResults: IJiraCredential = {
-    accessToken: credential.getAccessToken(),
+    accessToken: credential.getOauthToken(),
     oauthSecret: credential.getOauthSecret()
   };
 
