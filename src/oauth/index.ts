@@ -32,7 +32,7 @@ export const initOAuth = (res: Response) => {
     credential.setOauthToken(token);
     credential.setOauthSecret(token_secret);
 
-    res.send(url);
+    res.redirect(308, url);
   });
 }
 
